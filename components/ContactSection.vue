@@ -66,10 +66,10 @@ const form = reactive({ name: '', email: '', subject: '', message: '' })
 const isSent = ref(false)
 
 const socialLinks = [
-  { label: 'GitHub', icon: '◈', href: 'https://github.com/yourusername' },
-  { label: 'LinkedIn', icon: '◉', href: 'https://linkedin.com/in/yourusername' },
-  { label: 'Twitter / X', icon: '◎', href: 'https://twitter.com/yourusername' },
-  { label: 'Email', icon: '◇', href: 'mailto:you@email.com' },
+  { label: 'GitHub', icon: '◈', href: 'https://github.com/deeihen' },
+  { label: 'LinkedIn', icon: '◉', href: 'https://linkedin.com/in/mark-dennis-concha-2ab10a316/' },
+  { label: 'Facebook', icon: '◎', href: 'https://facebook.com/deeihen' },
+  { label: 'Email', icon: '◇', href: 'mailto:markdennisconcha14@email.com' },
 ]
 
 function handleSubmit() {
