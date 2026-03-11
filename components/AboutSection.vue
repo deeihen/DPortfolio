@@ -30,7 +30,7 @@
         <div class="about-visual">
           <div class="photo-frame">
             <div class="photo-placeholder">
-              <img src="/mephoto.jpeg" alt="Mark Dennis Concha" />
+              <img src="/mephoto.jpg" alt="Mark Dennis Concha" />
             </div>
             <div class="frame-accent frame-tl"></div>
             <div class="frame-accent frame-br"></div>
