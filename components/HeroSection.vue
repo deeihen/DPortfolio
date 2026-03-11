@@ -14,11 +14,11 @@
       </div>
 
       <h1 class="hero-title">
-        <span class="title-line line-1">CREATIVE</span>
+        <span class="title-line line-1">I WANT TO BE</span>
         <span class="title-line line-2">
-          <span class="outline-text">DEVELOPER</span>
+          <span class="outline-text">A SOC ANALYST</span>
         </span>
-        <span class="title-line line-3">& DESIGNER</span>
+        <span class="title-line line-3">& SO ON</span>
       </h1>
 
       <p class="hero-desc">
