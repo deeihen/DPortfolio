@@ -8,12 +8,26 @@
 
       <div class="about-grid">
         <div class="about-text">
-          <h2 class="section-title">I Turn Ideas<br><span class="outline">Into Reality</span></h2>
+          <h2 class="section-title">
+            Monitoring, Detecting, and<br /><span class="outline">Defending</span>
+          </h2>
           <p class="about-bio">
-            Hey! I'm <strong>Mark Dennis Concha</strong>, a creative developer who loves crafting beautiful, fast, and accessible web experiences. I obsess over the details — from pixel-perfect layouts to buttery-smooth animations.
+            Hi! I'm <strong>Mark Dennis Concha</strong>, a cybersecurity
+            enthusiast focused on Security Operations and threat monitoring. I’m
+            passionate about protecting systems and networks by identifying
+            vulnerabilities, analyzing suspicious activity, and responding to
+            potential security incidents.
           </p>
+
           <p class="about-bio">
-            When I'm not coding, you'll find me sketching UI ideas, exploring design trends, or enjoying a good cup of coffee ☕. I believe great software is equal parts art and engineering.
+            My interests lie in defensive security, particularly in areas such
+            as log analysis, threat detection, incident response, and security
+            monitoring. I enjoy studying attacker techniques and understanding
+            how security teams can detect and mitigate threats before they cause
+            damage. I continuously work on strengthening my skills with security
+            tools, network analysis, and cybersecurity frameworks while
+            documenting my journey and projects in the field of information
+            security.
           </p>
           <div class="about-meta">
             <div class="meta-item" v-for="m in meta" :key="m.label">
@@ -49,15 +63,15 @@
 
 <script setup>
 const meta = [
-  { label: 'Based in', value: 'Philippines 🇵🇭' },
-  { label: 'Role', value: 'Future SOC ANALYST' },
-  { label: 'Focus', value: 'Vue, Nuxt' },
-]
+  { label: "Based in", value: "Philippines" },
+  { label: "Role", value: "Future SOC ANALYST" },
+  { label: "Focus", value: "Cybersecurity" },
+];
 const stats = [
-  { num: '3+', label: 'Years Exp.' },
-  { num: '20+', label: 'Projects' },
-  { num: '10+', label: 'Happy Clients' },
-]
+  { num: "3+", label: "Years Exp." },
+  { num: "20+", label: "Projects" },
+  { num: "10+", label: "Happy Clients" },
+];
 </script>
 
 <style scoped>
@@ -74,10 +88,19 @@ const stats = [
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.font-mono { font-family: var(--font-mono); }
-.accent { color: var(--accent3); }
-.muted { color: var(--muted); }
-.outline { -webkit-text-stroke: 2px var(--accent2); color: transparent; }
+.font-mono {
+  font-family: var(--font-mono);
+}
+.accent {
+  color: var(--accent3);
+}
+.muted {
+  color: var(--muted);
+}
+.outline {
+  -webkit-text-stroke: 2px var(--accent2);
+  color: transparent;
+}
 
 .about-grid {
   display: grid;
@@ -99,7 +122,9 @@ const stats = [
   margin-bottom: 1.2rem;
   font-size: 1rem;
 }
-.about-bio strong { color: var(--text); }
+.about-bio strong {
+  color: var(--text);
+}
 
 .about-meta {
   display: flex;
@@ -111,9 +136,21 @@ const stats = [
   border-left: 3px solid var(--accent1);
   background: var(--surface);
 }
-.meta-item { display: flex; gap: 1rem; align-items: center; }
-.meta-label { color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; min-width: 80px; }
-.meta-val { color: var(--text); font-size: 0.95rem; }
+.meta-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.meta-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  min-width: 80px;
+}
+.meta-val {
+  color: var(--text);
+  font-size: 0.95rem;
+}
 
 .download-cv {
   display: inline-flex;
@@ -129,9 +166,17 @@ const stats = [
   border-radius: 2px;
   transition: all 0.2s;
 }
-.download-cv:hover { background: var(--accent3); color: #000; }
-.dl-icon { font-size: 1rem; transition: transform 0.2s; }
-.download-cv:hover .dl-icon { transform: translateY(3px); }
+.download-cv:hover {
+  background: var(--accent3);
+  color: #000;
+}
+.dl-icon {
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+.download-cv:hover .dl-icon {
+  transform: translateY(3px);
+}
 
 /* Visual side */
 .photo-frame {
@@ -155,15 +200,18 @@ const stats = [
 }
 .frame-accent {
   position: absolute;
-  width: 30px; height: 30px;
+  width: 30px;
+  height: 30px;
 }
 .frame-tl {
-  top: -8px; left: -8px;
+  top: -8px;
+  left: -8px;
   border-top: 3px solid var(--accent3);
   border-left: 3px solid var(--accent3);
 }
 .frame-br {
-  bottom: -8px; right: -8px;
+  bottom: -8px;
+  right: -8px;
   border-bottom: 3px solid var(--accent1);
   border-right: 3px solid var(--accent1);
 }
@@ -180,16 +228,27 @@ const stats = [
   text-align: center;
   transition: border-color 0.2s;
 }
-.stat-card:hover { border-color: var(--accent3); }
+.stat-card:hover {
+  border-color: var(--accent3);
+}
 .stat-num {
   font-family: var(--font-display);
   font-size: 2.2rem;
   color: var(--accent3);
   line-height: 1;
 }
-.stat-label { color: var(--muted); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+.stat-label {
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
 
 @media (max-width: 768px) {
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
 }
 </style>

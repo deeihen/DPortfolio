@@ -22,8 +22,9 @@
       </h1>
 
       <p class="hero-desc">
-        I build bold, memorable digital experiences that live at the intersection of design and technology.
-        Based in <span class="accent-text">the Philippines 🇵🇭</span> — working globally.
+        Passionate about cybersecurity, security operations, and threat
+        detection. Based in the Philippines 🇵🇭 — building skills to monitor,
+        analyze, and defend systems from evolving cyber threats.
       </p>
 
       <div class="hero-actions">
@@ -37,7 +38,9 @@
       <div class="hero-ticker">
         <div class="ticker-track">
           <span v-for="n in 6" :key="n">
-            Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; UI/UX &nbsp;·&nbsp; Motion &nbsp;·&nbsp; Creative Dev &nbsp;·&nbsp;
+            Cybersecurity &nbsp;·&nbsp; Threat Monitoring &nbsp;·&nbsp; Log
+            Analysis &nbsp;·&nbsp; Network Security &nbsp;·&nbsp; Incident
+            Response &nbsp;·&nbsp; SOC Operations &nbsp;·&nbsp;
           </span>
         </div>
       </div>
@@ -50,8 +53,7 @@
   </section>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .hero {
@@ -74,8 +76,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -87,26 +89,36 @@
   animation: drift 10s ease-in-out infinite alternate;
 }
 .blob-1 {
-  width: 500px; height: 500px;
+  width: 500px;
+  height: 500px;
   background: var(--accent1);
-  top: -100px; right: -100px;
+  top: -100px;
+  right: -100px;
   animation-delay: 0s;
 }
 .blob-2 {
-  width: 350px; height: 350px;
+  width: 350px;
+  height: 350px;
   background: var(--accent2);
-  bottom: 0; left: -80px;
+  bottom: 0;
+  left: -80px;
   animation-delay: -3s;
 }
 .blob-3 {
-  width: 280px; height: 280px;
+  width: 280px;
+  height: 280px;
   background: var(--accent4);
-  top: 40%; left: 40%;
+  top: 40%;
+  left: 40%;
   animation-delay: -6s;
 }
 @keyframes drift {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(30px, 40px) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(30px, 40px) scale(1.1);
+  }
 }
 
 .hero-content {
@@ -128,14 +140,22 @@
   color: var(--muted);
 }
 .dot {
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   background: var(--accent3);
   border-radius: 50%;
   animation: pulse 2s ease infinite;
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
 }
 
 .hero-title {
@@ -151,9 +171,17 @@
   display: block;
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.line-1 { color: var(--text); animation-delay: 0.1s; }
-.line-2 { animation-delay: 0.2s; }
-.line-3 { color: var(--accent3); animation-delay: 0.3s; }
+.line-1 {
+  color: var(--text);
+  animation-delay: 0.1s;
+}
+.line-2 {
+  animation-delay: 0.2s;
+}
+.line-3 {
+  color: var(--accent3);
+  animation-delay: 0.3s;
+}
 
 .outline-text {
   -webkit-text-stroke: 2px var(--accent1);
@@ -161,8 +189,14 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-desc {
@@ -173,7 +207,9 @@
   margin-bottom: 2.5rem;
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
-.accent-text { color: var(--text); }
+.accent-text {
+  color: var(--text);
+}
 
 .hero-actions {
   display: flex;
@@ -203,8 +239,12 @@
   color: #000;
   transform: translateY(-2px);
 }
-.btn-arrow { transition: transform 0.2s; }
-.btn-primary:hover .btn-arrow { transform: translateX(4px); }
+.btn-arrow {
+  transition: transform 0.2s;
+}
+.btn-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
 
 .btn-ghost {
   font-family: var(--font-mono);
@@ -216,7 +256,10 @@
   padding-bottom: 2px;
   transition: all 0.2s;
 }
-.btn-ghost:hover { color: var(--text); border-color: var(--text); }
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
 
 /* Ticker */
 .hero-ticker {
@@ -238,8 +281,12 @@
   color: var(--muted);
 }
 @keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .scroll-indicator {
@@ -264,10 +311,21 @@
   animation: scrollDown 1.5s ease-in-out infinite;
 }
 @keyframes scrollDown {
-  0%, 100% { transform: scaleY(1) translateY(0); opacity: 1; }
-  50% { transform: scaleY(0.5) translateY(10px); opacity: 0.5; }
+  0%,
+  100% {
+    transform: scaleY(1) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5) translateY(10px);
+    opacity: 0.5;
+  }
 }
 
-.font-mono { font-family: var(--font-mono); }
-.text-muted { color: var(--muted); }
+.font-mono {
+  font-family: var(--font-mono);
+}
+.text-muted {
+  color: var(--muted);
+}
 </style>

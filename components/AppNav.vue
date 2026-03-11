@@ -3,7 +3,7 @@
     <div class="nav-inner container">
       <NuxtLink to="/" class="logo">
         <span class="logo-bracket">[</span>
-        <span class="logo-name">YourName</span>
+        <span class="logo-name">Deeihen</span>
         <span class="logo-bracket">]</span>
       </NuxtLink>
 

@@ -10,9 +10,9 @@
 
 <script setup>
 useSeoMeta({
-  title: 'YourName — Creative Developer',
-  description: 'Personal portfolio of YourName — creative developer and designer based in the Philippines.',
-  ogTitle: 'YourName — Creative Developer',
+  title: 'My Portfolio',
+  description: 'Personal portfolio of Mark Dennis Concha.',
+  ogTitle: 'Mark Dennis Concha — Creative Developer',
   ogDescription: 'Building bold, memorable digital experiences.',
   ogImage: '/og-image.png',
   twitterCard: 'summary_large_image',
