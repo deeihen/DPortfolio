@@ -10,7 +10,7 @@
         <div class="about-text">
           <h2 class="section-title">I Turn Ideas<br><span class="outline">Into Reality</span></h2>
           <p class="about-bio">
-            Hey! I'm <strong>Your Name</strong>, a creative developer who loves crafting beautiful, fast, and accessible web experiences. I obsess over the details — from pixel-perfect layouts to buttery-smooth animations.
+            Hey! I'm <strong>Mark Dennis Concha</strong>, a creative developer who loves crafting beautiful, fast, and accessible web experiences. I obsess over the details — from pixel-perfect layouts to buttery-smooth animations.
           </p>
           <p class="about-bio">
             When I'm not coding, you'll find me sketching UI ideas, exploring design trends, or enjoying a good cup of coffee ☕. I believe great software is equal parts art and engineering.
@@ -30,8 +30,7 @@
         <div class="about-visual">
           <div class="photo-frame">
             <div class="photo-placeholder">
-              <span class="placeholder-text font-mono">YOUR PHOTO</span>
-              <div class="photo-deco"></div>
+              <img src="/mephoto.jpeg" alt="Mark Dennis Concha" />
             </div>
             <div class="frame-accent frame-tl"></div>
             <div class="frame-accent frame-br"></div>
@@ -51,8 +50,8 @@
 <script setup>
 const meta = [
   { label: 'Based in', value: 'Philippines 🇵🇭' },
-  { label: 'Role', value: 'Full-Stack Developer' },
-  { label: 'Focus', value: 'Vue, Nuxt, UX Design' },
+  { label: 'Role', value: 'Future SOC ANALYST' },
+  { label: 'Focus', value: 'Vue, Nuxt' },
 ]
 const stats = [
   { num: '3+', label: 'Years Exp.' },
@@ -144,28 +143,15 @@ const stats = [
   aspect-ratio: 4/5;
   background: var(--surface);
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
 }
-.placeholder-text {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--border);
-  text-transform: uppercase;
-}
-.photo-deco {
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 20px,
-    rgba(255,255,255,0.015) 20px,
-    rgba(255,255,255,0.015) 21px
-  );
 }
 .frame-accent {
   position: absolute;
