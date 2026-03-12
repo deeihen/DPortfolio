@@ -226,13 +226,16 @@
   background: var(--accent1);
   color: #fff;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: clamp(0.72rem, 2vw, 0.85rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.9rem 1.8rem;
   border-radius: 2px;
   transition: all 0.25s ease;
   font-weight: 700;
+  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .btn-primary:hover {
   background: var(--accent3);
@@ -248,13 +251,14 @@
 
 .btn-ghost {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: clamp(0.72rem, 2vw, 0.85rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   border-bottom: 1px solid var(--border);
   padding-bottom: 2px;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .btn-ghost:hover {
   color: var(--text);
@@ -348,6 +352,23 @@
     font-size: 0.95rem;
     margin-bottom: 2rem;
   }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  .btn-primary {
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    font-size: 0.8rem;
+  }
+  .btn-ghost {
+    text-align: center;
+    padding: 0.7rem 0;
+    border: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: block;
+  }
   .hero-ticker {
     margin-top: 2.5rem;
   }
@@ -380,15 +401,14 @@
     font-size: 0.88rem;
     line-height: 1.6;
   }
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
   .btn-primary {
-    width: 100%;
-    justify-content: center;
-    padding: 0.85rem 1.4rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.75rem;
+    gap: 0.4rem;
+  }
+  .btn-ghost {
+    font-size: 0.75rem;
+    padding: 0.65rem 0;
   }
 }
 </style>
