@@ -17,7 +17,7 @@
 
 <style scoped>
 .footer {
-  border-top: 1px solid var(--c-border);
+  border-top: 1px solid var(--border);
   padding: 2rem 0;
 }
 
@@ -31,15 +31,15 @@
 
 .footer__copy {
   font-size: 0.82rem;
-  color: var(--c-muted);
+  color: var(--muted);
 }
 
 .footer__link {
-  color: var(--c-lime);
-  transition: color var(--transition);
+  color: var(--accent3);
+  transition: color 0.2s;
 }
 
-.footer__link:hover { color: var(--c-cyan); }
+.footer__link:hover { color: var(--accent2); }
 
 .footer__badge {
   display: flex;
@@ -49,18 +49,26 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--c-muted);
+  color: var(--muted);
 }
 
 .footer__dot {
   width: 8px; height: 8px;
-  background: var(--c-lime);
+  background: var(--accent3);
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(200,241,53, 0.4); }
-  50%       { box-shadow: 0 0 0 6px rgba(200,241,53, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(185,255,0, 0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(185,255,0, 0); }
+}
+
+@media (max-width: 768px) {
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
 }
 </style>

@@ -264,6 +264,46 @@ const filteredProjects = computed(() =>
 .stack-item:last-child::after { content: ''; }
 
 @media (max-width: 768px) {
-  .projects-list { grid-template-columns: 1fr; }
+  .projects {
+    padding: 5rem 0;
+  }
+  .projects-list {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    gap: 1.5rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  .project-title {
+    font-size: 1.5rem;
+  }
+  .project-overlay {
+    opacity: 1;
+    background: rgba(0,0,0,0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .projects {
+    padding: 3.5rem 0;
+  }
+  .filter-tabs {
+    width: 100%;
+  }
+  .filter-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.65rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+  }
 }
 </style>

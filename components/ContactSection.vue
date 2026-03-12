@@ -195,8 +195,45 @@ function handleSubmit() {
 .footer-copy { font-size: 0.72rem; letter-spacing: 0.05em; }
 
 @media (max-width: 768px) {
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .contact {
+    padding: 5rem 0 0;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: 5rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  .outline {
+    -webkit-text-stroke: 1.5px var(--accent4);
+  }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 3.5rem 0 0;
+  }
+  .contact-grid {
+    padding-bottom: 3rem;
+  }
+  .contact-sub {
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .social-label {
+    font-size: 0.75rem;
+  }
+  .form-input {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.85rem;
+  }
 }
 </style>

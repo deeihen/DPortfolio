@@ -328,4 +328,67 @@
 .text-muted {
   color: var(--muted);
 }
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 5rem;
+  }
+  .hero-content {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 10vw, 5rem);
+    margin-bottom: 1.5rem;
+  }
+  .outline-text {
+    -webkit-text-stroke: 1.5px var(--accent1);
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .hero-ticker {
+    margin-top: 2.5rem;
+  }
+  .scroll-indicator {
+    display: none;
+  }
+  .blob-1 {
+    width: 300px;
+    height: 300px;
+  }
+  .blob-2 {
+    width: 200px;
+    height: 200px;
+  }
+  .blob-3 {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(2.2rem, 9vw, 3.5rem);
+  }
+  .hero-eyebrow {
+    margin-bottom: 1.5rem;
+    font-size: 0.7rem;
+  }
+  .hero-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+  }
+}
 </style>

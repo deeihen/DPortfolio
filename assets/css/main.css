@@ -33,6 +33,12 @@ body {
   cursor: none;
 }
 
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
 ::selection {
   background: var(--accent3);
   color: #000;
@@ -103,6 +109,12 @@ body::before {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.2rem;
+  }
 }
 
 .tag {

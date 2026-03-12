@@ -246,9 +246,53 @@ const stats = [
 }
 
 @media (max-width: 768px) {
+  .about {
+    padding: 5rem 0;
+  }
+  .section-label {
+    margin-bottom: 2.5rem;
+  }
   .about-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+  .outline {
+    -webkit-text-stroke: 1.5px var(--accent2);
+  }
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  .stat-card {
+    padding: 1rem 0.5rem;
+  }
+  .stat-num {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 3.5rem 0;
+  }
+  .about-bio {
+    font-size: 0.92rem;
+  }
+  .about-meta {
+    padding: 1rem;
+  }
+  .meta-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+  .download-cv {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>

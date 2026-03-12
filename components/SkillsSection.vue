@@ -191,8 +191,33 @@ const bars = [
 }
 
 @media (max-width: 768px) {
-  .skills-grid { grid-template-columns: 1fr; }
-  .skills-header { flex-direction: column; align-items: flex-start; }
+  .skills {
+    padding: 5rem 0;
+  }
+  .skills-grid { grid-template-columns: 1fr; margin-bottom: 3rem; }
+  .skills-header { flex-direction: column; align-items: flex-start; margin-bottom: 2.5rem; }
   .skills-sub { text-align: left; }
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  .skill-group {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills {
+    padding: 3.5rem 0;
+  }
+  .skill-group {
+    padding: 1.2rem;
+  }
+  .skill-tag {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.55rem;
+  }
+  .bar-name {
+    font-size: 0.85rem;
+  }
 }
 </style>
