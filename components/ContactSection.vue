@@ -13,6 +13,8 @@
       <li><a class="link" href="https://github.com/deeihen" target="_blank" rel="noopener">github</a></li>
       <li><a class="link" href="https://linkedin.com/in/mark-dennis-concha-2ab10a316/" target="_blank" rel="noopener">linkedin</a></li>
       <li><a class="link" href="https://facebook.com/deeihen" target="_blank" rel="noopener">facebook</a></li>
+      <li><a class="link" href="/mark-dennis-concha-resume.pdf" download>résumé (pdf)</a></li>
+      <li><a class="link" href="/mark-dennis-concha-cv.pdf" download>cv (pdf)</a></li>
     </ul>
   </section>
 </template>
@@ -53,7 +55,7 @@ const mail = 'mailto:markdennisconcha14@gmail.com?subject=SOC%20role%20for%20Mar
   transition: color 0.25s;
 }
 .contact__mail:hover { color: var(--ok); }
-.contact__links { display: flex; gap: 1.5rem; margin-top: 2.5rem; list-style: none; font-size: 15px; }
+.contact__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 2.5rem; list-style: none; font-size: 15px; }
 
 @media (max-width: 760px) {
   .contact__mail { font-size: 8.6vw; }

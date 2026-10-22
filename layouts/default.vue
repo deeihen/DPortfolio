@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AmbientBackdrop />
     <AppNav />
     <main>
       <slot />

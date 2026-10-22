@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Mark Dennis Concha',
+      title: "Mark Dennis Concha's Portfolio",
       meta: [
         { name: 'description', content: 'Mark Dennis Concha, aspiring SOC analyst in the Philippines.' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

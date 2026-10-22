@@ -1,5 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.hook('app:mounted', () => {
+  // after the page has hydrated: adding .in earlier makes Vue report a class mismatch
+  nuxtApp.hook('app:suspense:resolve', () => {
     (window as any).__reveal = true
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) {

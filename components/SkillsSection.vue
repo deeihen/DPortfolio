@@ -1,12 +1,13 @@
 <template>
   <section id="practice" class="practice wrap">
     <div class="section-head" data-reveal>
-      <span class="prompt">&gt;</span><h2>coverage</h2>
+      <span class="prompt">&gt;</span><h2>skills</h2>
     </div>
 
     <div class="practice__grid">
       <ul class="practice__list" role="tablist" aria-label="Skills">
         <li v-for="(s, i) in skills" :key="s.name" data-reveal :style="{ '--i': i }">
+          <p v-if="i === 0 || skills[i - 1].group !== s.group" class="group mono">// {{ s.group }}</p>
           <button
             class="row"
             role="tab"
@@ -37,6 +38,7 @@
 <script setup>
 const skills = [
   {
+    group: 'soc analysis',
     name: 'Log analysis',
     tools: 'Splunk',
     file: 'search.spl',
@@ -51,6 +53,7 @@ const skills = [
 | sort - failures`,
   },
   {
+    group: 'soc analysis',
     name: 'Threat detection',
     tools: 'Sigma, ATT&CK',
     file: 'new_local_admin.yml',
@@ -71,6 +74,7 @@ tags:
   - attack.t1136.001`,
   },
   {
+    group: 'soc analysis',
     name: 'Incident response',
     tools: 'NIST SP 800-61',
     file: 'playbook_ssh_bruteforce.md',
@@ -83,6 +87,7 @@ tags:
 [ ] 6. Report: timeline, IOCs, ATT&CK mapping, lessons`,
   },
   {
+    group: 'soc analysis',
     name: 'Network traffic',
     tools: 'Wireshark, tshark',
     file: 'capture.pcap',
@@ -94,6 +99,7 @@ tags:
 10.0.0.23    198.51.100.7   update-check.example   /beacon?id=7f3a`,
   },
   {
+    group: 'soc analysis',
     name: 'Endpoint monitoring',
     tools: 'Sysmon, Wazuh',
     file: 'sysmon_event_1.xml',
@@ -105,6 +111,7 @@ tags:
 <User>LAB\\jdoe</User>`,
   },
   {
+    group: 'soc analysis',
     name: 'Vulnerability scanning',
     tools: 'Nmap, OpenVAS',
     file: 'nmap_fw01.txt',
@@ -115,6 +122,61 @@ PORT     STATE SERVICE  VERSION
 80/tcp   open  http     nginx 1.18.0
 3389/tcp open  ms-wbt-server
 # 3389 exposed on a workstation: first thing to close`,
+  },
+  {
+    group: 'capture the flag',
+    name: 'Web exploitation',
+    tools: 'Burp Suite',
+    file: 'login_bypass.http',
+    desc: 'Finding the flaw in a web app: injections, broken auth, exposed endpoints. A classic SQL injection that skips the password check.',
+    code: `POST /login HTTP/1.1
+Host: chall.local
+Content-Type: application/x-www-form-urlencoded
+
+username=admin'--&password=x
+
+# the quote closes the string, -- comments out the password check
+# HTTP/1.1 302 Found  Location: /dashboard`,
+  },
+  {
+    group: 'capture the flag',
+    name: 'Forensics',
+    tools: 'binwalk, exiftool, Wireshark',
+    file: 'carve.sh',
+    desc: 'Pulling hidden data out of files, captures and images. Here a zip archive is tucked in behind the end of a PNG.',
+    code: `$ file evidence.png
+evidence.png: PNG image data, 800 x 600
+$ binwalk evidence.png
+0       PNG image, 800 x 600
+48213   Zip archive data, name: flag.txt
+$ binwalk -e evidence.png
+$ cat _evidence.png.extracted/flag.txt`,
+  },
+  {
+    group: 'capture the flag',
+    name: 'Cryptography',
+    tools: 'CyberChef, Python',
+    file: 'decode.py',
+    desc: 'Recognising the encoding or cipher, then peeling the layers off one at a time. Base64 wrapped around ROT13, a common two-step.',
+    code: `import base64, codecs
+
+c = "c3ludHtsMGhfajNlM19lMGcxM30="
+step1 = base64.b64decode(c).decode()  # synt{l0h_j3e3_e0g13}
+print(codecs.decode(step1, "rot13"))  # flag{y0u_w3r3_r0t13}`,
+  },
+  {
+    group: 'capture the flag',
+    name: 'OSINT and recon',
+    tools: 'Nmap, search operators',
+    file: 'recon.txt',
+    desc: 'Mapping the target before touching it: open ports, running services, and what is already public about it.',
+    code: `$ nmap -sC -sV 10.10.10.5
+21/tcp open  ftp   vsftpd 3.0.3  (anonymous login allowed)
+80/tcp open  http  Apache 2.4.41
+$ ftp 10.10.10.5          # user: anonymous
+ftp> get notes.txt        # "dev site moved to /old-backup"
+
+site:chall.local filetype:pdf "internal"`,
   },
 ]
 
@@ -131,6 +193,8 @@ const active = ref(0)
 }
 
 .practice__list { list-style: none; }
+.group { padding: 1.4rem 0.9rem 0.5rem; font-size: 13px; color: var(--ok); }
+li:first-child .group { padding-top: 0; }
 .row {
   display: flex;
   justify-content: space-between;

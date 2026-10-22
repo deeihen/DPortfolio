@@ -75,8 +75,18 @@ const shown = ref(items[0].stat.value)
 const steps = ref(null)
 const fill = ref(null)
 
+// count toward whichever item ends up active; a watcher sees only the final value when a
+// jump (nav link) toggles several items in one frame, so the number always matches the label
+let counting = false
+const counter = { v: shown.value }
+watch(active, (i) => {
+  const to = items[i].stat.value
+  if (!counting) { shown.value = to; return }
+  gsap.to(counter, { v: to, duration: 0.8, ease: 'power3.out', overwrite: true, onUpdate: () => { shown.value = Math.round(counter.v) } })
+})
+
 useMotion((motion) => {
-  const counter = { v: shown.value }
+  counting = motion
   const lis = steps.value.querySelectorAll('.ev__item')
 
   // the item crossing the middle of the screen drives the readout
@@ -85,13 +95,7 @@ useMotion((motion) => {
       trigger: li,
       start: 'top 55%',
       end: 'bottom 55%',
-      onToggle(self) {
-        if (!self.isActive) return
-        active.value = i
-        const to = items[i].stat.value
-        if (!motion) { shown.value = to; return }
-        gsap.to(counter, { v: to, duration: 0.8, ease: 'power3.out', overwrite: true, onUpdate: () => { shown.value = Math.round(counter.v) } })
-      },
+      onToggle(self) { if (self.isActive) active.value = i },
     })
   })
 

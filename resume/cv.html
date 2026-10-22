@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mark Dennis Concha - Curriculum Vitae</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Onest:wght@400;500;600&display=block">
+  <link rel="stylesheet" href="print.css">
+</head>
+<body>
+  <header>
+    <h1>Mark Dennis Concha</h1>
+    <p class="role">Curriculum Vitae · Aspiring SOC Analyst (Tier 1)</p>
+    <p class="contact mono">
+      <span>Taguig City, Metro Manila, PH</span>
+      <a href="mailto:markdennisconcha14@gmail.com">markdennisconcha14@gmail.com</a>
+      <a href="https://linkedin.com/in/mark-dennis-concha-2ab10a316/">linkedin.com/in/mark-dennis-concha-2ab10a316</a>
+      <a href="https://github.com/deeihen">github.com/deeihen</a>
+      <a href="https://markdennisconcha.vercel.app">markdennisconcha.vercel.app</a>
+    </p>
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <p>
+      Computer science student at Taguig City University, training for the security operations centre:
+      the room where analysts watch the alert queue, read logs and decide in minutes whether something is
+      an attack. I hold my first certifications from Cisco and IBM SkillsBuild, study how attackers move so
+      I can recognise their footprints, and take part in CTF events. I also build software with my team,
+      most recently the backend of RescueLink Taguig, an emergency platform now in production for the
+      Command Center of Taguig.
+    </p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Bachelor of Science in Computer Science</span><span class="entry__when">2023 – 2027 (expected)</span></div>
+      <p class="entry__sub">Taguig City University, Taguig City</p>
+    </div>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Senior High School, STEM-PTECH strand</span><span class="entry__when">2021 – 2023</span></div>
+      <p class="entry__sub">Taguig City University, Taguig City</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Certifications</h2>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Introduction to Cybersecurity</span><span class="entry__when">Aug 2026</span></div>
+      <p class="entry__sub">Cisco</p>
+    </div>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Cybersecurity Fundamentals</span><span class="entry__when">Aug 2026</span></div>
+      <p class="entry__sub">IBM SkillsBuild</p>
+    </div>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Working in a Digital World: Professional Skills</span><span class="entry__when">Aug 2026</span></div>
+      <p class="entry__sub">IBM SkillsBuild</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">RescueLink Taguig · Backend Developer, Documentation</span><span class="entry__when">2026</span></div>
+      <p class="entry__sub">Team of 4, built with the Command Center of Taguig · rescuelinktaguig.com</p>
+      <ul>
+        <li>Emergency response platform in production for the Command Center of Taguig. Residents request help through live voice, video or chat from any browser.</li>
+        <li>Coordinators triage each request, log the incident, pinpoint its location and coordinate Police, Fire, Medical and DRRMO from one real-time workspace.</li>
+        <li>Worked on the backend and wrote the project documentation; took part in on-site requirements gathering and system demos with the Command Center.</li>
+      </ul>
+      <p class="stack">Next.js · React · TypeScript · NestJS · Socket.IO · PostgreSQL · Prisma · Docker · AWS</p>
+    </div>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">Booklat · AppBuildersPH Hackathon 2026: Local AI</span><span class="entry__when">2026</span></div>
+      <p class="entry__sub">Team of 3</p>
+      <ul>
+        <li>Offline oral-reading assessment for Filipino teachers. On-device speech recognition suggests word-level reading marks in English and Filipino, and learner audio never leaves the device.</li>
+        <li>Selected as a wildcard to pitch to the judges.</li>
+      </ul>
+      <p class="stack">Local AI · on-device speech recognition</p>
+    </div>
+    <div class="entry">
+      <div class="entry__head"><span class="entry__title">.Js · Free JavaScript Course</span><span class="entry__when">2026</span></div>
+      <p class="entry__sub">Solo build · dotjsv2.vercel.app · github.com/deeihen/dotjs</p>
+      <ul>
+        <li>JavaScript from "Hello, World!" for complete beginners: 21 short lessons that run and check code in the browser.</li>
+        <li>No account and no install; progress is saved in local storage on the learner's own device.</li>
+      </ul>
+      <p class="stack">Next.js · React · Three.js · GSAP</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>SOC Skills</h2>
+    <dl class="skills">
+      <dt>Log analysis</dt><dd>Splunk searches over auth logs, e.g. sources with repeated failures followed by a successful login.</dd>
+      <dt>Threat detection</dt><dd>Writing Sigma rules mapped to MITRE ATT&amp;CK, such as new members of local Administrators (T1136).</dd>
+      <dt>Incident response</dt><dd>NIST SP 800-61 playbooks: confirm, contain, scope, eradicate, recover, report.</dd>
+      <dt>Network traffic</dt><dd>Following conversations in Wireshark and tshark to see what left the network and where it went.</dd>
+      <dt>Endpoint monitoring</dt><dd>Sysmon and Wazuh process events, such as Office spawning encoded PowerShell.</dd>
+      <dt>Vulnerability scanning</dt><dd>Nmap and OpenVAS scans, then ranking exposed services by what to close first.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>CTF Skills</h2>
+    <dl class="skills">
+      <dt>Web exploitation</dt><dd>SQL injection, broken authentication and exposed endpoints, using Burp Suite.</dd>
+      <dt>Forensics</dt><dd>Carving hidden data from files, images and packet captures (binwalk, exiftool, Wireshark).</dd>
+      <dt>Cryptography</dt><dd>Recognising encodings and classic ciphers and peeling layers with CyberChef and Python.</dd>
+      <dt>OSINT and recon</dt><dd>Service enumeration with Nmap and finding what is already public about a target.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Technical Stack</h2>
+    <dl class="skills">
+      <dt>Security tools</dt><dd>Burp Suite, Nmap, Wireshark, CyberChef</dd>
+      <dt>Operating systems</dt><dd>Kali Linux, Parrot OS, Arch Linux</dd>
+      <dt>Languages and data</dt><dd>Python, Java, C#, MySQL</dd>
+      <dt>Web</dt><dd>React, Next.js</dd>
+      <dt>AI tools</dt><dd>Claude Code, Codex, Antigravity, Devin</dd>
+    </dl>
+  </section>
+</body>
+</html>

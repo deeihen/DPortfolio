@@ -15,13 +15,17 @@
         <a href="#evidence" class="button">see achievements</a>
         <a href="#work" class="button button--ghost">view projects</a>
       </div>
+      <div class="hero__docs" data-reveal style="--i: 4">
+        <a class="button button--ghost" href="/mark-dennis-concha-resume.pdf" download>↓ résumé (pdf)</a>
+        <a class="button button--ghost" href="/mark-dennis-concha-cv.pdf" download>↓ cv (pdf)</a>
+      </div>
       <p class="hero__status mono" data-reveal style="--i: 4">
         <span class="ok">●</span> status: open to tier 1 SOC roles
       </p>
     </div>
 
     <div class="hero__visual">
-      <ProfilePhoto class="hero__photo" data-reveal style="--i: 2" />
+      <div class="hero__photo" data-reveal style="--i: 2"><ProfilePhoto /></div>
     </div>
   </section>
 </template>
@@ -69,7 +73,9 @@ useMotion((motion) => {
 .hero__role { max-width: 48ch; margin-top: 1.5rem; font-size: var(--step-lead); line-height: 1.3; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 .hero__cta .button { min-height: 48px; padding: 0 1.4em; font-size: 14px; }
-.hero__status { margin-top: 1.5rem; font-size: 14px; color: var(--muted); }
+.hero__docs { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
+.hero__docs .button { min-height: 44px; padding: 0 1.2em; font-size: 13px; }
+.hero__status { margin-top: 1rem; font-size: 14px; color: var(--muted); }
 
 @media (max-width: 900px) {
   .hero { min-height: 0; }
