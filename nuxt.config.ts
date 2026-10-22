@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       // entrance animations only hide content once we know scripts run
-      script: [{ innerHTML: "document.documentElement.classList.add('js');setTimeout(function(){if(!window.__reveal)document.documentElement.classList.remove('js')},3000)" }],
+      script: [{ innerHTML: "try{var t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.classList.add('js');setTimeout(function(){if(!window.__reveal)document.documentElement.classList.remove('js')},3000)" }],
     },
   },
   nitro: {

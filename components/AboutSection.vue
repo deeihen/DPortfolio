@@ -7,24 +7,17 @@
     <div class="about__grid">
       <div v-tilt class="panel about__card" data-reveal style="--i: 1">
         <div class="panel__bar"><span>analyst profile</span><span class="ok">● online</span></div>
-        <div class="about__body">
-          <img src="/mephoto.jpg" alt="Mark Dennis Concha" width="960" height="960" loading="lazy" />
-          <dl class="mono">
-            <div v-for="f in facts" :key="f.k"><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>
-          </dl>
-        </div>
+        <dl class="about__facts mono">
+          <div v-for="f in facts" :key="f.k"><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>
+        </dl>
       </div>
 
       <div class="about__text">
-        <p data-reveal style="--i: 2">
-          I'm a computer science student at Taguig City University, training for the security
-          operations centre: the room where analysts watch the alert queue, read logs and decide
-          in minutes whether something is an attack.
-        </p>
+        <p ref="lead"><span v-for="(w, i) in words" :key="i">{{ w + ' ' }}</span></p>
         <p data-reveal style="--i: 3">
           I've earned my first certifications from Cisco and IBM SkillsBuild, I study how attackers
-          move so I can recognise their footprints, and I build things with my team, like Booklat,
-          which we pitched at the AppBuildersPH Hackathon. The code lives on
+          move so I can recognise their footprints, and I build things with my team, like
+          RescueLink Taguig for the city's Command Center. The code lives on
           <a class="link" href="https://github.com/deeihen" target="_blank" rel="noopener">GitHub</a>
           and I post progress on
           <a class="link" href="https://linkedin.com/in/mark-dennis-concha-2ab10a316/" target="_blank" rel="noopener">LinkedIn</a>.
@@ -35,6 +28,26 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+
+const words = (
+  "I'm a computer science student at Taguig City University, training for the security " +
+  'operations centre: the room where analysts watch the alert queue, read logs and decide ' +
+  'in minutes whether something is an attack.'
+).split(' ')
+
+const lead = ref(null)
+// words light up one by one as the paragraph scrolls through the viewport
+useMotion((motion) => {
+  if (!motion) return
+  gsap.fromTo(lead.value.children, { opacity: 0.15 }, {
+    opacity: 1,
+    stagger: 0.1,
+    ease: 'none',
+    scrollTrigger: { trigger: lead.value, start: 'top 80%', end: 'bottom 40%', scrub: true },
+  })
+})
+
 const facts = [
   { k: 'name', v: 'Mark Dennis Concha' },
   { k: 'handle', v: 'deeihen' },
@@ -54,9 +67,7 @@ const facts = [
   align-items: start;
 }
 
-.about__body { display: flex; gap: 0.9rem; padding: 0.9rem; align-items: start; }
-.about__card img { width: 104px; height: 104px; flex: none; object-fit: cover; object-position: 30% 25%; filter: grayscale(0.35) contrast(1.05); }
-.about__card dl { font-size: 13px; min-width: 0; }
+.about__facts { padding: 0.9rem; font-size: 13px; min-width: 0; }
 .about__card dl div { display: grid; grid-template-columns: 5.5em 1fr; padding: 0.15rem 0; }
 .about__card dt { color: var(--muted); }
 

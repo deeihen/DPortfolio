@@ -9,6 +9,9 @@
   --ok-ink: #04130a;
   --med: #f2b84b;
   --high: #ff6b6b;
+  --info: #6cb6ff;
+  --ai: #b392f0;
+  color-scheme: dark;
 
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
   --font-text: 'Onest', system-ui, sans-serif;
@@ -23,6 +26,23 @@
   --gap: clamp(12px, 1.6vw, 24px);
   --section: clamp(80px, 10vw, 160px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* light theme: same roles, inks darkened to keep 4.5:1 on white */
+:root[data-theme="light"] {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --panel-2: #eef1f5;
+  --line: #d8dde4;
+  --ink: #0d1117;
+  --muted: #576271;
+  --ok: #15803d;
+  --ok-ink: #ffffff;
+  --med: #b45309;
+  --high: #c62828;
+  --info: #1d6fd1;
+  --ai: #7c4dcc;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,6 +113,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .button:hover { background: var(--ink); }
 .button:active { transform: scale(0.97); }
+.button--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.button--ghost:hover { background: var(--panel-2); box-shadow: inset 0 0 0 1px var(--ok); }
 
 .link {
   text-decoration: underline;
@@ -128,3 +150,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .js [data-reveal], .js .panel[data-reveal] { transform: none; transition: opacity 0.3s linear; }
   *, *::before, *::after { animation: none !important; }
 }
+
+/* credential status, shared by the ticker and the evidence log */
+.chip {
+  display: inline-block;
+  padding: 0.05em 0.55em;
+  border: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.chip.verified { color: var(--ok); }
+.chip.live { color: var(--ok); }
+.chip.pitched { color: var(--med); }
+.chip.studying { color: var(--ink); }
+.chip.target { color: var(--muted); border-style: dashed; }

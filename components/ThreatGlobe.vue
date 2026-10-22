@@ -16,6 +16,8 @@
 <script setup>
 import createGlobe from 'cobe'
 
+const { theme } = useTheme()
+
 // focus: { lat, lng, label } or null; the globe turns to it, then resumes drifting
 const props = defineProps({ focus: { type: Object, default: null } })
 
@@ -86,6 +88,12 @@ onMounted(() => {
         phi += 0.0025
         theta += (0.25 - theta) * 0.04
       }
+      // light theme: pale land dots on a pale sphere
+      const light = theme.value === 'light'
+      state.dark = light ? 0 : 1
+      state.mapBrightness = light ? 3 : 6
+      state.baseColor = light ? [0.82, 0.86, 0.92] : [0.36, 0.42, 0.5]
+      state.glowColor = light ? [0.93, 0.95, 0.97] : [0.07, 0.09, 0.12]
       state.phi = phi + dragPhi
       state.theta = theta
       state.width = size * dpr

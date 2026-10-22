@@ -1,12 +1,12 @@
 <template>
-  <section id="contact" class="contact wrap">
+  <section id="contact" ref="root" class="contact wrap">
     <p class="contact__cmd mono muted" data-reveal>
       <span class="ok">mark@soc</span>:~$ ./contact --role "SOC analyst"
     </p>
     <p class="contact__ask" data-reveal style="--i: 1">
       Building a SOC team, or running a lab I should join? Write to me.
     </p>
-    <a class="contact__mail mono" :href="mail" data-reveal style="--i: 2">
+    <a ref="addr" class="contact__mail mono" :href="mail">
       markdennisconcha14@<br />gmail.com<span class="ok blink" aria-hidden="true">_</span>
     </a>
     <ul class="contact__links mono" data-reveal style="--i: 3">
@@ -18,6 +18,20 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+
+const root = ref(null)
+const addr = ref(null)
+useMotion((motion) => {
+  if (!motion) return
+  gsap.fromTo(addr.value, { xPercent: 18, opacity: 0.2 }, {
+    xPercent: 0,
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: { trigger: root.value, start: 'top 85%', end: 'center 60%', scrub: true },
+  })
+})
+
 const mail = 'mailto:markdennisconcha14@gmail.com?subject=SOC%20role%20for%20Mark'
 </script>
 
