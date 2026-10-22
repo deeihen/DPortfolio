@@ -1,298 +1,70 @@
 <template>
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-label">
-        <span class="font-mono accent">02 /</span>
-        <span class="font-mono muted">About Me</span>
+  <section id="about" class="about wrap">
+    <div class="section-head" data-reveal>
+      <span class="prompt">&gt;</span><h2>whoami</h2>
+    </div>
+
+    <div class="about__grid">
+      <div v-tilt class="panel about__card" data-reveal style="--i: 1">
+        <div class="panel__bar"><span>analyst profile</span><span class="ok">● online</span></div>
+        <div class="about__body">
+          <img src="/mephoto.jpg" alt="Mark Dennis Concha" width="960" height="960" loading="lazy" />
+          <dl class="mono">
+            <div v-for="f in facts" :key="f.k"><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>
+          </dl>
+        </div>
       </div>
 
-      <div class="about-grid">
-        <div class="about-text">
-          <h2 class="section-title">
-            Monitoring, Detecting, and<br /><span class="outline">Defending</span>
-          </h2>
-          <p class="about-bio">
-            Hi! I'm <strong>Mark Dennis Concha</strong>, a cybersecurity
-            enthusiast focused on Security Operations and threat monitoring. I’m
-            passionate about protecting systems and networks by identifying
-            vulnerabilities, analyzing suspicious activity, and responding to
-            potential security incidents.
-          </p>
-
-          <p class="about-bio">
-            My interests lie in defensive security, particularly in areas such
-            as log analysis, threat detection, incident response, and security
-            monitoring. I enjoy studying attacker techniques and understanding
-            how security teams can detect and mitigate threats before they cause
-            damage. I continuously work on strengthening my skills with security
-            tools, network analysis, and cybersecurity frameworks while
-            documenting my journey and projects in the field of information
-            security.
-          </p>
-          <div class="about-meta">
-            <div class="meta-item" v-for="m in meta" :key="m.label">
-              <span class="meta-label font-mono">{{ m.label }}</span>
-              <span class="meta-val">{{ m.value }}</span>
-            </div>
-          </div>
-          <a href="/resume.pdf" target="_blank" class="download-cv">
-            <span>Download CV</span>
-            <span class="dl-icon">↓</span>
-          </a>
-        </div>
-
-        <div class="about-visual">
-          <div class="photo-frame">
-            <div class="photo-placeholder">
-              <img src="/mephoto.jpg" alt="Mark Dennis Concha" />
-            </div>
-            <div class="frame-accent frame-tl"></div>
-            <div class="frame-accent frame-br"></div>
-          </div>
-          <div class="stats-grid">
-            <div class="stat-card" v-for="s in stats" :key="s.label">
-              <div class="stat-num">{{ s.num }}</div>
-              <div class="stat-label font-mono">{{ s.label }}</div>
-            </div>
-          </div>
-        </div>
+      <div class="about__text">
+        <p data-reveal style="--i: 2">
+          I'm a computer science student at Taguig City University, training for the security
+          operations centre: the room where analysts watch the alert queue, read logs and decide
+          in minutes whether something is an attack.
+        </p>
+        <p data-reveal style="--i: 3">
+          I've earned my first certifications from Cisco and IBM SkillsBuild, I study how attackers
+          move so I can recognise their footprints, and I build things with my team, like Booklat,
+          which we pitched at the AppBuildersPH Hackathon. The code lives on
+          <a class="link" href="https://github.com/deeihen" target="_blank" rel="noopener">GitHub</a>
+          and I post progress on
+          <a class="link" href="https://linkedin.com/in/mark-dennis-concha-2ab10a316/" target="_blank" rel="noopener">LinkedIn</a>.
+        </p>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const meta = [
-  { label: "Based in", value: "Philippines" },
-  { label: "Role", value: "Future SOC ANALYST" },
-  { label: "Focus", value: "Cybersecurity" },
-];
-const stats = [
-  { num: "3+", label: "Years Exp." },
-  { num: "20+", label: "Projects" },
-  { num: "10+", label: "Happy Clients" },
-];
+const facts = [
+  { k: 'name', v: 'Mark Dennis Concha' },
+  { k: 'handle', v: 'deeihen' },
+  { k: 'school', v: 'BS CS, Taguig City University' },
+  { k: 'location', v: 'Taguig City, Metro Manila' },
+  { k: 'target', v: 'SOC analyst, tier 1' },
+  { k: 'focus', v: 'blue team, detection' },
+]
 </script>
 
 <style scoped>
-.about {
-  padding: 8rem 0;
-  position: relative;
-}
-.section-label {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 4rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.font-mono {
-  font-family: var(--font-mono);
-}
-.accent {
-  color: var(--accent3);
-}
-.muted {
-  color: var(--muted);
-}
-.outline {
-  -webkit-text-stroke: 2px var(--accent2);
-  color: transparent;
-}
-
-.about-grid {
+.about { padding-block: var(--section); }
+.about__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--gap) calc(var(--gap) * 3);
   align-items: start;
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 1;
-  margin-bottom: 2rem;
-}
+.about__body { display: flex; gap: 0.9rem; padding: 0.9rem; align-items: start; }
+.about__card img { width: 104px; height: 104px; flex: none; object-fit: cover; object-position: 30% 25%; filter: grayscale(0.35) contrast(1.05); }
+.about__card dl { font-size: 13px; min-width: 0; }
+.about__card dl div { display: grid; grid-template-columns: 5.5em 1fr; padding: 0.15rem 0; }
+.about__card dt { color: var(--muted); }
 
-.about-bio {
-  color: var(--muted);
-  line-height: 1.8;
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-}
-.about-bio strong {
-  color: var(--text);
-}
+.about__text { font-size: var(--step-lead); line-height: 1.35; max-width: 34em; }
+.about__text p + p { margin-top: 1.2em; }
 
-.about-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent1);
-  background: var(--surface);
-}
-.meta-item {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.meta-label {
-  color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  min-width: 80px;
-}
-.meta-val {
-  color: var(--text);
-  font-size: 0.95rem;
-}
-
-.download-cv {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent3);
-  border: 1.5px solid var(--accent3);
-  padding: 0.7rem 1.4rem;
-  border-radius: 2px;
-  transition: all 0.2s;
-}
-.download-cv:hover {
-  background: var(--accent3);
-  color: #000;
-}
-.dl-icon {
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-.download-cv:hover .dl-icon {
-  transform: translateY(3px);
-}
-
-/* Visual side */
-.photo-frame {
-  position: relative;
-  margin-bottom: 2rem;
-}
-.photo-placeholder {
-  width: 100%;
-  aspect-ratio: 4/5;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.photo-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-}
-.frame-accent {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-}
-.frame-tl {
-  top: -8px;
-  left: -8px;
-  border-top: 3px solid var(--accent3);
-  border-left: 3px solid var(--accent3);
-}
-.frame-br {
-  bottom: -8px;
-  right: -8px;
-  border-bottom: 3px solid var(--accent1);
-  border-right: 3px solid var(--accent1);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 1.2rem 1rem;
-  text-align: center;
-  transition: border-color 0.2s;
-}
-.stat-card:hover {
-  border-color: var(--accent3);
-}
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  color: var(--accent3);
-  line-height: 1;
-}
-.stat-label {
-  color: var(--muted);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-top: 0.3rem;
-}
-
-@media (max-width: 768px) {
-  .about {
-    padding: 5rem 0;
-  }
-  .section-label {
-    margin-bottom: 2.5rem;
-  }
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
-    margin-bottom: 1.5rem;
-  }
-  .outline {
-    -webkit-text-stroke: 1.5px var(--accent2);
-  }
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
-  }
-  .stat-card {
-    padding: 1rem 0.5rem;
-  }
-  .stat-num {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .about {
-    padding: 3.5rem 0;
-  }
-  .about-bio {
-    font-size: 0.92rem;
-  }
-  .about-meta {
-    padding: 1rem;
-  }
-  .meta-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
-  }
-  .download-cv {
-    width: 100%;
-    justify-content: center;
-  }
+@media (max-width: 900px) {
+  .about__grid { grid-template-columns: minmax(0, 1fr); }
+  .about__card { max-width: 420px; }
 }
 </style>

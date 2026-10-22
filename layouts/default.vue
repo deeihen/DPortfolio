@@ -1,17 +1,9 @@
 <template>
-  <div class="layout">
-    <CustomCursor />
+  <div>
     <AppNav />
     <main>
       <slot />
     </main>
+    <AppFooter />
   </div>
 </template>
-
-<script setup>
-</script>
-
-<style scoped>
-.layout { position: relative; }
-main { position: relative; }
-</style>

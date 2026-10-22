@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeroSection />
+    <TriageSection />
     <AboutSection />
     <SkillsSection />
     <ProjectsSection />
@@ -10,11 +11,11 @@
 
 <script setup>
 useSeoMeta({
-  title: 'My Portfolio',
-  description: 'Personal portfolio of Mark Dennis Concha.',
-  ogTitle: 'Mark Dennis Concha — Creative Developer',
-  ogDescription: 'Building bold, memorable digital experiences.',
-  ogImage: '/og-image.png',
+  title: 'Mark Dennis Concha, aspiring SOC analyst',
+  description: 'Mark Dennis Concha, cybersecurity enthusiast and CS student at Taguig City University, training to be a SOC analyst.',
+  ogTitle: 'Mark Dennis Concha, aspiring SOC analyst',
+  ogDescription: 'Find the intrusion in a real-looking auth log, then see what I practise.',
+  ogImage: '/mephoto.jpg',
   twitterCard: 'summary_large_image',
 })
 </script>

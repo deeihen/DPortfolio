@@ -1,414 +1,155 @@
 <template>
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <div class="grid-lines"></div>
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-
-    <div class="container hero-content">
-      <div class="hero-eyebrow">
-        <span class="dot"></span>
-        <span class="font-mono text-muted">Available for work</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="title-line line-1">I WANT TO BE</span>
-        <span class="title-line line-2">
-          <span class="outline-text">A SOC ANALYST</span>
-        </span>
-        <span class="title-line line-3">& SO ON</span>
+  <section id="top" class="hero wrap">
+    <div class="hero__id">
+      <h1 class="hero__name mono">
+        <span data-reveal>mark dennis</span>
+        <span data-reveal style="--i: 1">concha<span class="ok blink" aria-hidden="true">_</span></span>
       </h1>
-
-      <p class="hero-desc">
-        Passionate about cybersecurity, security operations, and threat
-        detection. Based in the Philippines 🇵🇭 — building skills to monitor,
-        analyze, and defend systems from evolving cyber threats.
+      <p class="hero__role" data-reveal style="--i: 2">
+        Cybersecurity enthusiast and computer science student at Taguig City University,
+        training for the SOC.
       </p>
-
-      <div class="hero-actions">
-        <a href="#projects" class="btn-primary">
-          View My Work
-          <span class="btn-arrow">→</span>
-        </a>
-        <a href="#contact" class="btn-ghost">Get in Touch</a>
-      </div>
-
-      <div class="hero-ticker">
-        <div class="ticker-track">
-          <span v-for="n in 6" :key="n">
-            Cybersecurity &nbsp;·&nbsp; Threat Monitoring &nbsp;·&nbsp; Log
-            Analysis &nbsp;·&nbsp; Network Security &nbsp;·&nbsp; Incident
-            Response &nbsp;·&nbsp; SOC Operations &nbsp;·&nbsp;
-          </span>
-        </div>
-      </div>
+      <p class="hero__status mono" data-reveal style="--i: 3">
+        <span class="ok">●</span> status: open to tier 1 SOC roles
+      </p>
     </div>
 
-    <div class="scroll-indicator">
-      <span class="font-mono">scroll</span>
-      <div class="scroll-line"></div>
+    <ThreatGlobe class="hero__globe" :focus="focus" />
+
+    <div v-tilt class="panel hero__alerts" data-reveal style="--i: 3">
+      <div class="panel__bar"><span>alerts · home lab</span><span>{{ alerts.length }} open</span></div>
+      <ul>
+        <li
+          v-for="a in alerts"
+          :key="a.title"
+          @mouseenter="focus = a.geo"
+          @mouseleave="focus = null"
+          @focusin="focus = a.geo"
+          @focusout="focus = null"
+        >
+          <component :is="a.href ? 'a' : 'div'" :href="a.href" class="alert">
+            <span class="alert__sev mono" :class="a.sev">{{ a.sev.toUpperCase() }}</span>
+            <span class="alert__title">{{ a.title }}</span>
+            <span class="alert__host mono muted">{{ a.host }} · {{ a.time }}</span>
+            <span v-if="a.href" class="alert__go mono">investigate →</span>
+          </component>
+        </li>
+      </ul>
+    </div>
+
+    <div v-tilt class="panel hero__tail" data-reveal style="--i: 4">
+      <div class="panel__bar"><span>tail -f /var/log/auth.log</span><span class="ok">live</span></div>
+      <pre aria-label="Sample authentication log"><code><span
+        v-for="l in shown"
+        :key="l.key"
+        class="tail__line"
+        :class="{ hit: l.hit }"
+      >{{ l.text }}</span></code></pre>
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const alerts = [
+  { sev: 'high', title: 'SSH brute force, then a successful login', host: 'web01', time: '02:14', href: '#triage', geo: { lat: 52.37, lng: 4.9, label: 'src: 203.0.113.45 · Amsterdam, NL' } },
+  { sev: 'med', title: 'New local administrator account created', host: 'ws-07', time: '01:52', geo: { lat: 14.52, lng: 121.05, label: 'src: internal · ws-07, Taguig' } },
+  { sev: 'low', title: 'Port scan from 198.51.100.7', host: 'fw01', time: '01:30', geo: { lat: 37.77, lng: -122.42, label: 'src: 198.51.100.7 · San Francisco, US' } },
+]
+
+const focus = ref(null)
+
+const SIZE = 8
+const count = ref(SIZE)
+const shown = computed(() => {
+  const out = []
+  for (let n = count.value - SIZE; n < count.value; n++) {
+    out.push({ ...authLog[n % authLog.length], key: n })
+  }
+  return out
+})
+
+onMounted(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  let t
+  const start = () => { t = setInterval(() => count.value++, 1400) }
+  const onVis = () => { clearInterval(t); if (!document.hidden) start() }
+  start()
+  document.addEventListener('visibilitychange', onVis)
+  onBeforeUnmount(() => { clearInterval(t); document.removeEventListener('visibilitychange', onVis) })
+})
+</script>
 
 <style scoped>
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding-top: 6rem;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
+  column-gap: var(--gap);
+  row-gap: clamp(24px, 4svh, 48px);
+  min-height: calc(100svh - 58px);
+  padding-block: clamp(32px, 6svh, 72px) var(--margin);
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.grid-lines {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.18;
-  animation: drift 10s ease-in-out infinite alternate;
-}
-.blob-1 {
-  width: 500px;
-  height: 500px;
-  background: var(--accent1);
-  top: -100px;
-  right: -100px;
-  animation-delay: 0s;
-}
-.blob-2 {
-  width: 350px;
-  height: 350px;
-  background: var(--accent2);
-  bottom: 0;
-  left: -80px;
-  animation-delay: -3s;
-}
-.blob-3 {
-  width: 280px;
-  height: 280px;
-  background: var(--accent4);
-  top: 40%;
-  left: 40%;
-  animation-delay: -6s;
-}
-@keyframes drift {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-  to {
-    transform: translate(30px, 40px) scale(1.1);
-  }
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
-
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  background: var(--accent3);
-  border-radius: 50%;
-  animation: pulse 2s ease infinite;
-}
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.7);
-  }
-}
-
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 12vw, 11rem);
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-}
-.title-line {
-  display: block;
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.line-1 {
-  color: var(--text);
-  animation-delay: 0.1s;
-}
-.line-2 {
-  animation-delay: 0.2s;
-}
-.line-3 {
-  color: var(--accent3);
-  animation-delay: 0.3s;
-}
-
-.outline-text {
-  -webkit-text-stroke: 2px var(--accent1);
-  color: transparent;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-desc {
-  max-width: 520px;
-  color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 2.5rem;
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-}
-.accent-text {
-  color: var(--text);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--accent1);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: clamp(0.72rem, 2vw, 0.85rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.9rem 1.8rem;
-  border-radius: 2px;
-  transition: all 0.25s ease;
+.hero__id { grid-column: 1 / 8; grid-row: 1; align-self: center; position: relative; z-index: 1; }
+.hero__globe { grid-column: 7 / 13; grid-row: 1; align-self: center; justify-self: end; width: min(100%, 64svh); }
+.hero__name {
+  font-size: var(--step-display);
   font-weight: 700;
-  white-space: nowrap;
-  max-width: 100%;
-  box-sizing: border-box;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
 }
-.btn-primary:hover {
-  background: var(--accent3);
-  color: #000;
-  transform: translateY(-2px);
-}
-.btn-arrow {
-  transition: transform 0.2s;
-}
-.btn-primary:hover .btn-arrow {
-  transform: translateX(4px);
-}
+.hero__name > span { display: block; }
+.hero__role { max-width: 46ch; margin-top: 1.5rem; font-size: var(--step-lead); line-height: 1.3; }
+.hero__status { margin-top: 1rem; font-size: 14px; color: var(--muted); }
 
-.btn-ghost {
-  font-family: var(--font-mono);
-  font-size: clamp(0.72rem, 2vw, 0.85rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 2px;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.btn-ghost:hover {
-  color: var(--text);
-  border-color: var(--text);
-}
+.hero__alerts { grid-column: 1 / 6; }
+.hero__tail { grid-column: 6 / 13; min-width: 0; }
 
-/* Ticker */
-.hero-ticker {
-  margin-top: 4rem;
+.alert {
+  display: grid;
+  grid-template-columns: 3.4em 1fr auto;
+  grid-template-areas: 'sev title go' 'sev host go';
+  column-gap: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.15s;
+}
+li { list-style: none; }
+li:last-child .alert { border-bottom: 0; }
+a.alert:hover { background: var(--panel-2); }
+a.alert:active { background: var(--line); }
+.alert__sev { grid-area: sev; font-size: 12px; font-weight: 700; padding-top: 0.25em; }
+.alert__sev.low { color: var(--muted); }
+.alert__title { grid-area: title; font-size: 15px; }
+.alert__host { grid-area: host; font-size: 13px; }
+.alert__go { grid-area: go; align-self: center; font-size: 13px; color: var(--ok); }
+
+.hero__tail pre {
+  height: calc(8 * 1.6em + 1.6rem);
   overflow: hidden;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 0.8rem 0;
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
-}
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker 20s linear infinite;
+  padding: 0.8rem 0.9rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.tail__line {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--muted);
+  animation: in 0.5s var(--ease);
 }
-@keyframes ticker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
+.tail__line:last-child { color: var(--ink); }
+.tail__line.hit { color: var(--high); }
+@keyframes in { from { opacity: 0; transform: translateY(6px); } }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  writing-mode: vertical-rl;
-}
-.scroll-line {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--accent3), transparent);
-  animation: scrollDown 1.5s ease-in-out infinite;
-}
-@keyframes scrollDown {
-  0%,
-  100% {
-    transform: scaleY(1) translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scaleY(0.5) translateY(10px);
-    opacity: 0.5;
-  }
-}
-
-.font-mono {
-  font-family: var(--font-mono);
-}
-.text-muted {
-  color: var(--muted);
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding-top: 5rem;
-  }
-  .hero-content {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-  }
-  .hero-title {
-    font-size: clamp(2.8rem, 10vw, 5rem);
-    margin-bottom: 1.5rem;
-  }
-  .outline-text {
-    -webkit-text-stroke: 1.5px var(--accent1);
-  }
-  .hero-desc {
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-  }
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
-  }
-  .btn-primary {
-    justify-content: center;
-    padding: 0.85rem 1.4rem;
-    font-size: 0.8rem;
-  }
-  .btn-ghost {
-    text-align: center;
-    padding: 0.7rem 0;
-    border: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    display: block;
-  }
-  .hero-ticker {
-    margin-top: 2.5rem;
-  }
-  .scroll-indicator {
-    display: none;
-  }
-  .blob-1 {
-    width: 300px;
-    height: 300px;
-  }
-  .blob-2 {
-    width: 200px;
-    height: 200px;
-  }
-  .blob-3 {
-    width: 150px;
-    height: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: clamp(2.2rem, 9vw, 3.5rem);
-  }
-  .hero-eyebrow {
-    margin-bottom: 1.5rem;
-    font-size: 0.7rem;
-  }
-  .hero-desc {
-    font-size: 0.88rem;
-    line-height: 1.6;
-  }
-  .btn-primary {
-    padding: 0.8rem 1rem;
-    font-size: 0.75rem;
-    gap: 0.4rem;
-  }
-  .btn-ghost {
-    font-size: 0.75rem;
-    padding: 0.65rem 0;
-  }
+@media (max-width: 900px) {
+  .hero { grid-template-rows: auto; min-height: 0; }
+  .hero__id, .hero__alerts, .hero__tail { grid-column: 1 / -1; }
+  .hero__globe { grid-column: 1 / -1; grid-row: auto; justify-self: center; width: min(92vw, 460px); margin-block: -8% -4%; }
+  .hero__name { font-size: 13vw; }
+  .alert { grid-template-columns: 3.4em 1fr; grid-template-areas: 'sev title' 'sev host' 'sev go'; }
+  .alert__go { margin-top: 0.3rem; }
 }
 </style>

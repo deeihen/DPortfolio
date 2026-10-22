@@ -1,222 +1,76 @@
 <template>
-  <nav class="nav" :class="{ scrolled: isScrolled }">
-    <div class="nav-inner container">
-      <NuxtLink to="/" class="logo">
-        <span class="logo-bracket">[</span>
-        <span class="logo-name">Deeihen</span>
-        <span class="logo-bracket">]</span>
-      </NuxtLink>
-
-      <ul class="nav-links">
-        <li v-for="link in links" :key="link.href">
-          <a :href="link.href" class="nav-link">
-            <span class="nav-link-num">{{ link.num }}</span>
-            {{ link.label }}
-          </a>
-        </li>
-      </ul>
-
-      <a href="#contact" class="nav-cta">Hire Me</a>
-
-      <button class="hamburger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Toggle navigation menu">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-    </div>
-
-    <Transition name="mobile-menu">
-      <div v-if="menuOpen" class="mobile-overlay" @click.self="menuOpen = false">
-        <div class="mobile-menu">
-          <ul class="mobile-links">
-            <li v-for="link in links" :key="link.href">
-              <a :href="link.href" class="mobile-link" @click="menuOpen = false">
-                <span class="nav-link-num">{{ link.num }}</span>
-                {{ link.label }}
-              </a>
-            </li>
-          </ul>
-          <a href="#contact" class="mobile-cta" @click="menuOpen = false">Hire Me</a>
-        </div>
-      </div>
-    </Transition>
-  </nav>
+  <header class="nav mono">
+    <a href="#top" class="nav__mark"><span class="ok">mark@soc</span>:<span class="muted">~</span>$</a>
+    <button
+      class="nav__menu"
+      :aria-expanded="open"
+      aria-controls="nav-links"
+      @click="open = !open"
+    >{{ open ? 'close' : 'menu' }}</button>
+    <ul id="nav-links" class="nav__links" :class="{ open }">
+      <li v-for="l in links" :key="l.href">
+        <a :href="l.href" class="nav__link" @click="open = false">{{ l.label }}</a>
+      </li>
+    </ul>
+    <span class="nav__clock muted">PHT {{ clock }}</span>
+    <a :href="linkedin" class="button" target="_blank" rel="noopener">connect with me</a>
+  </header>
 </template>
 
 <script setup>
-const { y } = useWindowScroll()
-const isScrolled = computed(() => y.value > 60)
-const menuOpen = ref(false)
-
-watch(menuOpen, (val) => {
-  document.body.style.overflow = val ? 'hidden' : ''
-})
-
+const open = ref(false)
+const linkedin = 'https://linkedin.com/in/mark-dennis-concha-2ab10a316/'
 const links = [
-  { num: '01', label: 'About', href: '#about' },
-  { num: '02', label: 'Skills', href: '#skills' },
-  { num: '03', label: 'Projects', href: '#projects' },
-  { num: '04', label: 'Contact', href: '#contact' },
+  { label: 'investigate', href: '#triage' },
+  { label: 'profile', href: '#about' },
+  { label: 'coverage', href: '#practice' },
+  { label: 'cases', href: '#work' },
 ]
+
+const clock = ref('--:--:--')
+const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })
+onMounted(() => {
+  const tick = () => { clock.value = fmt.format(new Date()) }
+  tick()
+  const t = setInterval(tick, 1000)
+  onBeforeUnmount(() => clearInterval(t))
+})
 </script>
 
 <style scoped>
 .nav {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 1.5rem 0;
-  transition: all 0.3s ease;
-}
-.nav.scrolled {
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 0;
-}
-.nav-inner {
+  z-index: 20;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.logo {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-.logo-bracket { color: var(--accent3); }
-.logo-name { color: var(--text); margin: 0 0.1em; }
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-}
-.nav-link {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.nav-link:hover { color: var(--text); }
-.nav-link-num { color: var(--accent1); font-size: 0.65rem; }
-
-.nav-cta {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.55rem 1.2rem;
-  border: 1.5px solid var(--accent3);
-  color: var(--accent3);
-  transition: all 0.2s ease;
-  border-radius: 2px;
-}
-.nav-cta:hover {
-  background: var(--accent3);
-  color: #000;
-}
-
-/* Hamburger button */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  z-index: 110;
-}
-.hamburger-line {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--text);
-  transition: all 0.3s ease;
-  transform-origin: center;
-}
-.hamburger.open .hamburger-line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.open .hamburger-line:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.open .hamburger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Mobile overlay & menu */
-.mobile-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.mobile-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-}
-.mobile-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
   gap: 1.5rem;
-  text-align: center;
+  padding: 0.6rem var(--margin);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
 }
-.mobile-link {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-.mobile-link:hover { color: var(--text); }
-.mobile-cta {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.7rem 1.6rem;
-  border: 1.5px solid var(--accent3);
-  color: var(--accent3);
-  border-radius: 2px;
-  transition: all 0.2s;
-}
-.mobile-cta:hover { background: var(--accent3); color: #000; }
+.nav__mark { font-weight: 700; }
+.nav__links { display: flex; gap: 1.4rem; list-style: none; margin-right: auto; }
+.nav__link { color: var(--muted); transition: color 0.2s; }
+.nav__link:hover { color: var(--ok); }
+.nav__link::before { content: '/'; color: var(--line); margin-right: 0.15em; }
+.nav__clock { font-variant-numeric: tabular-nums; }
+.nav__menu { display: none; min-height: 40px; color: var(--muted); margin-right: auto; }
 
-/* Mobile menu transition */
-.mobile-menu-enter-active,
-.mobile-menu-leave-active {
-  transition: opacity 0.3s ease;
-}
-.mobile-menu-enter-from,
-.mobile-menu-leave-to {
-  opacity: 0;
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .hamburger { display: flex; }
+@media (max-width: 760px) {
+  .nav { flex-wrap: wrap; gap: 0 1rem; }
+  .nav__menu { display: block; }
+  .nav__clock { display: none; }
+  .nav__links {
+    display: none;
+    order: 5;
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 0.5rem;
+  }
+  .nav__links.open { display: flex; }
+  .nav__link { display: block; padding: 0.6rem 0; color: var(--ink); }
 }
 </style>
