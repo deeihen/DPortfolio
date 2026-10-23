@@ -60,6 +60,18 @@ const projects = [
       { label: 'code', href: 'https://github.com/deeihen/dotjs' },
     ],
   },
+  {
+    title: 'Paddock 101',
+    kind: 'interactive F1 guide',
+    year: '2026',
+    role: 'solo build',
+    summary: 'Scroll-driven 3D guide to Formula 1, from beginner to enthusiast. Built around a 3D 2026 F1 car and a simulated timing-tower race.',
+    stack: ['Vite', 'Three.js', 'GSAP ScrollTrigger', 'Lenis'],
+    links: [
+      { label: 'live', href: 'https://paddock101.vercel.app' },
+      { label: 'code', href: 'https://github.com/deeihen/Paddock101' },
+    ],
+  },
 ]
 
 const root = ref(null)
